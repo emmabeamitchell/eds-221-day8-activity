@@ -1,0 +1,44 @@
+---
+title: "best graph"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(here)
+```
+
+```{r}
+sanfran <- read_csv(here("data", "San_Francisco_Communitywide_Greenhouse_Gas_Inventory.csv"))
+```
+
+
+```{r}
+summary_table_sector <- sanfran |>
+  select(Emissions_mtCO2e, Sector_General)
+summary_table_yr_com <- sanfran |>
+  select(Emissions_mtCO2e, Calendar_Year, Commodity_Type)
+
+subset_2005 <- sanfran |>
+  filter(Calendar_Year == 2005) |>
+  filter(str_detect(Sector_Detail2,"PG&E")) |>
+  select(Calendar_Year, Sector_Detail2, Emissions_mtCO2e)
+  
+plot_mutate <- sanfran |>
+  mutate(Emissions_mtCO2e = Emissions_mtCO2e )
+
+  ggplot(data = sanfran, aes(x = Sector_General, y = Emissions_mtCO2e)) +
+    geom_col(fill = "orange") +
+    labs(
+      title = "CO2 Emissions in San Francisco by Sector",
+      x = "General Sector Type",
+      y = "Greenhouse Gas Emissions\n(metric tons of carbon dioxide)\n",
+      caption = "greenhouse gas emissions divided by sector in San Francisco"
+    ) + theme_minimal()
+    
+  
+  
+```
+

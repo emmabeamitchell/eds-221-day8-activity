@@ -1,0 +1,40 @@
+---
+title: "worst graph"
+author: "Emma Bea"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r}
+library(tidyverse)
+library(here)
+library(ggplot2)
+```
+
+
+```{r}
+space <- read_csv(here("data", "space_launches.csv"))
+
+ggplot(data = space, aes(x = launch_date, y = mission, color = "A1EF8B")) +
+  geom_point() +
+  theme(plot.background = element_rect(fill ="#6BF178")) +
+  annotate("text", x = 2/17/71,
+           y = 10,
+           label = "LOOKS GREAT!!!", color = "#016FB9") + geom_vline(xintercept = 2/17/71, color = "#EAD94C") +
+  annotate("text", x = 8/17/73, y = 40,
+           label = "Can you see this?",
+           size = 50) +
+  labs(
+    title = "BEST GRAPH!!!",
+    x = "LaUnCH   DAte",
+    y = "Mi\nssio\nn",
+    color = "#C6C013") 
+  
+      
+  
+  
+```
+
+
